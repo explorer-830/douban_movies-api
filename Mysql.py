@@ -7,12 +7,12 @@ from fake_useragent import UserAgent
 conn = pymysql.connect(
     host="localhost",
     user="root",
-    password="2004830",  # 改成你自己的密码
+    password="2004830",  
     charset="utf8mb4"
 )
 cursor = conn.cursor()
 
-# 2. 创建数据库（如果不存在）
+# 2. 创建数据库
 cursor.execute("CREATE DATABASE IF NOT EXISTS douban_movies")
 conn.select_db("douban_movies")
 
@@ -50,10 +50,10 @@ for tr in soup.select("tr.item"):
         INSERT INTO movies (title, rating, people, url)
         VALUES (%s, %s, %s, %s)
     """, (title, rating, people, url_tag))
-    print(f"✅ 已存入：{title} | {rating} | {people}")
+    print(f" 已存入：{title} | {rating} | {people}")
 
 # 6. 提交并关闭
 conn.commit()
 cursor.close()
 conn.close()
-print("🎉 所有数据已存入 MySQL！")
+print(" 所有数据已存入 MySQL！")
